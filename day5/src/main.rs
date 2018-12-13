@@ -8,14 +8,34 @@ fn main() -> io::Result<()> {
     let f = File::open(&args[1])?;
     let mut reader = BufReader::new(&f);
     let mut buffer: Vec<u8> = Vec::new();
-    let mut size = 0;
-    let result = reader.read_to_end(& mut buffer);
+    reader.read_to_end(& mut buffer);
 
-    match result {
-        Ok(res) => size=res,
-        Err(_e) => println!("didn;t work"),
+    let mut min_size = 1000000;
+    for unit in 97..97+26+1 {
+        let mut without = remove_unit(&buffer, unit);
+        let size = react_polymer(&mut without);
+        if size < min_size {
+            min_size = size;
+        }
     }
 
+    println!("{}", min_size-1);
+
+    Ok(())
+}
+
+fn remove_unit(full: &Vec<u8>, unit: u8) -> Vec<u8> {
+    let mut reduced = Vec::new();
+    for b in full {
+        if *b != unit && *b != unit - 32 {
+            reduced.push(*b);
+        }
+    }
+    return reduced;
+}
+
+fn react_polymer(buffer: &mut Vec<u8>) -> usize {
+    let mut size = buffer.len();
     let mut i = 0;
     while i < size-1 {
         if buffer[i]>buffer[i+1] && buffer[i]-buffer[i+1] == 32 {
@@ -37,7 +57,5 @@ fn main() -> io::Result<()> {
         }
     }
 
-    println!("{}", size-1);
-
-    Ok(())
+    return size;
 }
