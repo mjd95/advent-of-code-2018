@@ -8,6 +8,22 @@ day5/target/
 day6/target/
 day7/target/
 day8/target/
+day9/target/
+day10/target/
+day11/target/
+day12/target/
+day13/target/
+day14/target/
+day15/target/
+day16/target/
+day17/target/
+day18/target/
+day19/target/
+day20/target/
+day21/target/
+day22/target/
+day23/target/
+day24/target/
 
 # Remove Cargo.lock from gitignore if creating an executable, leave it for libraries
 # More information here https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
